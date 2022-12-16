@@ -12,7 +12,6 @@ function Modals() {
             <ModalHeader>Completed</ModalHeader>
             <ModalCloseButton />
             <Text>Your order successful complete , you can enjoy </Text>
-  
             <ModalFooter>
               <Button colorScheme='blue' mr={3} onClick={onClose}>
                 Close
