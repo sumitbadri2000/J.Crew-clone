@@ -26,20 +26,9 @@ import {
   export default function ProductDetails() {
     const {id} = useParams()
     const [product,setProduct] = React.useState([])
-    const [cart,setCart] = React.useState([])
- 
-    const addToCart=()=>{
-      axios({
-        method:"post",
-        url:"https://crewstore.onrender.com/cart",
-        data:{
-          ...product
-        }
-      })
-  }
 
     React.useEffect(()=>{
-        axios.get(`https://crewstore.onrender.com/men/${id}`).then((res)=>{
+        axios.get(`https://crewstore.onrender.com/women/${id}`).then((res)=>{
             setProduct(res.data)
         })
     },[id])
@@ -194,8 +183,7 @@ import {
               _hover={{
                 transform: 'translateY(2px)',
                 boxShadow: 'lg',
-              }}
-              onClick={()=>addToCart()}>
+              }}>
               Add to cart
             </Button>
   
