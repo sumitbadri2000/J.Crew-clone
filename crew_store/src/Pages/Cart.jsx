@@ -1,3 +1,4 @@
+import { GridItem,Grid } from "@chakra-ui/react"
 import {
     Box,
     Center,
@@ -7,12 +8,24 @@ import {
     Stack,
     Image,
   } from '@chakra-ui/react';
-  import {Link} from "react-router-dom"
-    
-  export default function Products({limit,image,price,description,discount,id}) {
+import axios from "axios"
+import React from "react"
+import Modals from "./Modal";
+export default function Carts(){
+    const [cart,setCart] = React.useState([])
+    React.useEffect(()=>{
+        axios.get("https://crewstore.onrender.com/cart").then((res) => {
+             setCart(res.data)
+            console.log(res)
+        })
+    },[])
     return (
-      <Center py={12}>
-        <Link to={`/Men/${id}`}>
+        <div>
+            <h1>cart</h1>
+            <Grid templateColumns="repeat(4,1fr)" gap={6}>
+                {cart.map((e)=>(
+                    <GridItem key={e.id}>
+                        <Center py={12}>
         <Box
           role={'group'}
           p={6}
@@ -50,30 +63,36 @@ import {
               height={230}
               width={282}
               objectFit={'cover'}
-              src={image}
+              src={e.image}
             />
           </Box>
           <Stack pt={10} align={'center'}>
             <Text color={'gray.500'} fontSize={'sm'} textTransform={'uppercase'}>
-              {limit}
+              {e.limit}
             </Text>
             <Heading fontSize={'2xl'} fontFamily={'body'} fontWeight={500}>
-              {description}
+              {e.description}
             </Heading>
             <Stack direction={'row'} align={'center'}>
               <Text fontWeight={800} fontSize={'xl'}>
-              ₹{discount}
+              ₹{e.discount}
               </Text>
               <Text textDecoration={'line-through'} color={'gray.600'}>
-              ₹{price}
+              ₹{e.price}
               </Text>
               <Text color={'gray.500'} fontSize={'sm'} textTransform={'uppercase'}>
-              {limit}
+              {e.limit}
             </Text>
             </Stack>
           </Stack>
         </Box>
-      </Link>
       </Center>
-    );
-  }
+   
+                    </GridItem>
+                ))}
+                 
+            </Grid>
+            <Modals />
+        </div>
+    )
+}

@@ -9,10 +9,10 @@ import {
   } from '@chakra-ui/react';
   import {Link} from "react-router-dom"
     
-  export default function Products({limit,image,price,description,discount,id}) {
+  export default function WomenProducts({limit,image,price,description,discount,id}) {
     return (
       <Center py={12}>
-        <Link to={`/Men/${id}`}>
+        <Link to={`/Women/${id}`}>
         <Box
           role={'group'}
           p={6}
