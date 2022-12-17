@@ -6,6 +6,7 @@ import Women from "./Women"
 import ProductDetails from "./ProductDetails"
 import WomenSingleDetails from "./WomenSingleDetails"
 import Carts from "./Cart"
+import Login from "./Login"
 
 export default function AllRouter(){
     return(
@@ -17,6 +18,7 @@ export default function AllRouter(){
                 <Route path="/Women" element={<Women />}></Route>
                 <Route path="/Women/:id" element={<WomenSingleDetails />}></Route>    
                 <Route path="/Cart" element={<Carts />}></Route>
+                <Route path="/Login" element={<Login />}></Route>
             </Routes>
         </div>
     )

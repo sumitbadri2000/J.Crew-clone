@@ -101,18 +101,23 @@ export default function Home(){
             </div>
         </div>
         <div className='grid2'>
+            <Link to={"/Women"}>
             <div className='container21'>
                 <div className='inner2'>
                     <h1>Going somewhere snowy?</h1>
                     <p>Visit the SKI shop</p>
                 </div>
             </div>
+            </Link>
+            <Link to={"/Women"}>
             <div className='container22'>
                 <div className='inner2'>
                     <h1>Facts:Sweaters make great gifts</h1>
                     <p>One from them, one for you</p>
                 </div>
             </div>
+            </Link>
+            <Link to={"/Women"}>
             <div className='container23'>
                 <div className='inner2'>
                     <h1>Not-So-Snooze-worthy pj's</h1>
@@ -120,23 +125,15 @@ export default function Home(){
                     <p>Shop pj's for the whole family</p>
                 </div>
             </div>
+            </Link>
+            <Link to={"/Women"}>
             <div className='container24' >
                 <div className='inner2'>
                     <h1>Our warmest coats</h1>
                     <p>Bundle up</p>
                 </div>
             </div>
-        </div>
-        <h1>More you need to see</h1>
-        <div className='grid3'>
-                {create.map((ele)=>(
-                    <div className='img'>
-                        <Link to={"/Men"}>
-                    <img src={ele.im} alt="img" />
-                    <p>{ele.title}</p>
-                    </Link>
-                    </div>
-                ))} 
+            </Link>
         </div>
         <div className='main'>
             <div className='first'>
@@ -145,7 +142,7 @@ export default function Home(){
             <div className='main_grid'>
                 {data1.map((ele)=>(
                     <div className='img'>
-                        <Link to={"/Men"}>
+                        <Link to={"/Women"}>
                     <img src={ele.image} alt="img" />
                     <h5>{ele.h5}</h5>
                     <h1>{ele.h1}</h1>
@@ -157,7 +154,7 @@ export default function Home(){
             <div className='main_grid1'>
                 {data2.map((ele)=>(
                     <div className='img'>
-                        <Link to={"/Men"}>
+                        <Link to={"/Women"}>
                     <img src={ele.image} alt="img" />
                     <h1>{ele.h1}</h1>
                     <p>{ele.p}</p>
@@ -165,6 +162,19 @@ export default function Home(){
                     </div>
                 ))} 
             </div>
+        </div>
+        <div>
+        <h1 className="h">More you need to see</h1>
+        <div className='grid3'>
+                {create.map((ele)=>(
+                    <div className='img'>
+                        <Link to={"/Women"}>
+                    <img src={ele.im} alt="img" />
+                    <p>{ele.title}</p>
+                    </Link>
+                    </div>
+                ))} 
+        </div>
         </div>
         </>
     )

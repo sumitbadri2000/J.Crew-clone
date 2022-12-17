@@ -15,6 +15,7 @@ import {
 // import { ReactNode } from "react";
 import { FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 import { BiMailSend } from "react-icons/bi";
+import {Link as RouterLink} from "react-router-dom"
 
  const SocialButton = ({
    children,
@@ -60,39 +61,31 @@ export default function Footer(){
     >
       <Container as={Stack} maxW={"6xl"} py={10}>
         <SimpleGrid
-          templateColumns={{ sm: "1fr 1fr", md: "2fr 1fr 1fr 2fr" }}
+          templateColumns={{ sm: "1fr 1fr", md: "1fr 1fr 1fr 2fr" }}
           spacing={8}
         >
-          <Stack spacing={6}>
-            <Text fontSize={"sm"}>
-              © 2022 Chakra Templates. All rights reserved
-            </Text>
-            <Stack direction={"row"} spacing={6}>
-              <SocialButton label={"Twitter"} href={"#"}>
-                <FaTwitter />
-              </SocialButton>
-              <SocialButton label={"YouTube"} href={"#"}>
-                <FaYoutube />
-              </SocialButton>
-              <SocialButton label={"Instagram"} href={"#"}>
-                <FaInstagram />
-              </SocialButton>
-            </Stack>
-          </Stack>
           <Stack align={"flex-start"}>
-            <ListHeader>Company</ListHeader>
-            <Link href={"#"}>About us</Link>
-            <Link href={"#"}>Blog</Link>
+            <ListHeader>Help</ListHeader>
+            <Link href={"#"}>Customer Service</Link>
+            <Link href={"#"}>Track order</Link>
+            <Link href={"#"}>Return and Exchanges</Link>
+            <Link href={"#"}>Shipping</Link>
             <Link href={"#"}>Contact us</Link>
-            <Link href={"#"}>Pricing</Link>
-            <Link href={"#"}>Testimonials</Link>
           </Stack>
           <Stack align={"flex-start"}>
-            <ListHeader>Support</ListHeader>
-            <Link href={"#"}>Help Center</Link>
-            <Link href={"#"}>Terms of Service</Link>
-            <Link href={"#"}>Legal</Link>
-            <Link href={"#"}>Privacy Policy</Link>
+            <ListHeader>Quick Link</ListHeader>
+            <RouterLink to={"/Men"}>Men</RouterLink>
+            <RouterLink to={"/WoMen"}>Women</RouterLink>
+            <RouterLink to={"/"}>Home</RouterLink>
+            <Link href={"#"}>My Favorites</Link>
+            <Link href={"#"}>Status</Link>
+          </Stack>
+          <Stack align={"flex-start"}>
+            <ListHeader>About Crew Store</ListHeader>
+            <Link href={"#"}>Our Story</Link>
+            <Link href={"#"}>Careers</Link>
+            <Link href={"#"}>Social Responsibilties</Link>
+            <Link href={"#"}>My Favorites</Link>
             <Link href={"#"}>Status</Link>
           </Stack>
           <Stack align={"flex-start"}>
@@ -115,6 +108,22 @@ export default function Footer(){
                 aria-label="Subscribe"
                 icon={<BiMailSend />}
               />
+            </Stack>
+          </Stack>
+          <Stack spacing={6}>
+            <Text fontSize={"sm"}>
+              © 2022 Crew store. All rights reserved
+            </Text>
+            <Stack direction={"row"} spacing={6}>
+              <SocialButton label={"Twitter"} href={"#"}>
+                <FaTwitter />
+              </SocialButton>
+              <SocialButton label={"YouTube"} href={"#"}>
+                <FaYoutube />
+              </SocialButton>
+              <SocialButton label={"Instagram"} href={"#"}>
+                <FaInstagram />
+              </SocialButton>
             </Stack>
           </Stack>
         </SimpleGrid>
