@@ -1,31 +1,32 @@
-import axios from "axios"
-import React from "react"
+import React, { useState } from "react";
 
-export const AuthContext = React.createContext()
-
-export default function AuthContextProvider({children}){
-
-    const [isAuth,setIsAuth] = React.useState(false)
-    const login=async(form)=>{
-        try{
-          let res = await axios({
-            method:"post",
-            url:"https://reqres.in/api/login",
-            data:{
-              email:form.email,
-              password:form.password
-            }
-          })
-          setIsAuth(true)
-          console.log(res)
-    
-        }catch(err){
-          console.log(err)
-        }
-      }
-      return(
-        <AuthContext.Provider value={{isAuth,setIsAuth, login}}>
-            {children}
-        </AuthContext.Provider>
-      )
+export const AuthContext = React.createContext();
+function AuthContextProvider({ children }) {
+  const [state, setState] = useState({
+    isAuth: false,
+    token: null,
+    userName: null,
+  });
+  const loginUser = (token,userName) => {
+    setState({
+      ...state,
+      isAuth: true,
+      token,
+      userName:userName
+    });
+  };
+  const logoutUser = () => {
+    setState({
+      ...state,
+      isAuth: false,
+      token: null,
+    });
+  };
+  return (
+    <AuthContext.Provider value={{ state, loginUser, logoutUser }}>
+      {children}
+    </AuthContext.Provider>
+  );
 }
+
+export default AuthContextProvider;

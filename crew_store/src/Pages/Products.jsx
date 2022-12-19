@@ -23,12 +23,13 @@ import {
           rounded={'lg'}
           pos={'relative'}
           zIndex={1}
+          height={"380px"}
         > 
           <Box
             rounded={'lg'}
             mt={-12}
             pos={'relative'}
-            height={'230px'}
+            height={'200px'}
             _after={{
               transition: 'all .3s ease',
               content: '""',
@@ -47,8 +48,8 @@ import {
             }}>
             <Image
               rounded={'lg'}
-              height={230}
-              width={282}
+              height={240}
+              width={280}
               objectFit={'cover'}
               src={image}
             />
@@ -57,7 +58,7 @@ import {
             <Text color={'gray.500'} fontSize={'sm'} textTransform={'uppercase'}>
               {limit}
             </Text>
-            <Heading fontSize={'2xl'} fontFamily={'body'} fontWeight={500}>
+            <Heading fontSize={'1xl'} fontFamily={'body'} fontWeight={400}>
               {description}
             </Heading>
             <Stack direction={'row'} align={'center'}>

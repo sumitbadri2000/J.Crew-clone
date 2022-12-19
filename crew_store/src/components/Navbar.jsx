@@ -1,291 +1,61 @@
+import React from "react";
+import { HiSearch } from "react-icons/hi";
+import { Divider } from "@chakra-ui/react";
+import logo from "../crewstorelogo.png"
+import { BsHandbag } from "react-icons/bs";
+import {NavLink,Link } from "react-router-dom";
+
+
 import {
   Box,
-  Flex,
+  Container,
+  HStack,
   Text,
-  IconButton,
-  Button,
-  Stack,
-  Collapse,
-  Icon,
-  Link,
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-  useColorModeValue,
-  useBreakpointValue,
-  useDisclosure,
-} from '@chakra-ui/react';
-import {
-  HamburgerIcon,
-  CloseIcon,
-  ChevronDownIcon,
-  ChevronRightIcon,
-} from '@chakra-ui/icons';
+  InputGroup,
+  InputRightElement,
+  Input,
+  Image
+} from "@chakra-ui/react";
+import { AuthContext } from "../Context/AuthContext";
 
-export default function WithSubnavigation() {
-  const { isOpen, onToggle } = useDisclosure();
+export default function Navbar(){
+
+  const changeColor = (e) => {
+    e.target.style.color = "black";
+    e.target.style.cursor = "pointer";
+  };
+
+  const {state} = React.useContext(AuthContext)
 
   return (
     <Box>
-      <Flex
-        bg={useColorModeValue('white', 'gray.800')}
-        color={useColorModeValue('gray.600', 'white')}
-        minH={'60px'}
-        py={{ base: 2 }}
-        px={{ base: 4 }}
-        borderBottom={1}
-        borderStyle={'solid'}
-        borderColor={useColorModeValue('gray.200', 'gray.900')}
-        align={'center'}>
-        <Flex
-          flex={{ base: 1, md: 'auto' }}
-          ml={{ base: -2 }}
-          display={{ base: 'flex', md: 'none' }}>
-          <IconButton
-            onClick={onToggle}
-            icon={
-              isOpen ? <CloseIcon w={3} h={3} /> : <HamburgerIcon w={5} h={5} />
-            }
-            variant={'ghost'}
-            aria-label={'Toggle Navigation'}
-          />
-        </Flex>
-        <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
-          <Text
-            textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
-            fontFamily={'heading'}
-            color={useColorModeValue('gray.800', 'white')}>
-            Logo
-          </Text>
-
-          <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
-            <DesktopNav />
-          </Flex>
-        </Flex>
-
-        <Stack
-          flex={{ base: 1, md: 0 }}
-          justify={'flex-end'}
-          direction={'row'}
-          spacing={6}>
-          <Button
-            as={'a'}
-            fontSize={'sm'}
-            fontWeight={400}
-            variant={'link'}
-            href={'#'}>
-            Sign In
-          </Button>
-          <Button
-            display={{ base: 'none', md: 'inline-flex' }}
-            fontSize={'sm'}
-            fontWeight={600}
-            color={'white'}
-            bg={'pink.400'}
-            href={'#'}
-            _hover={{
-              bg: 'pink.300',
-            }}>
-            Sign Up
-          </Button>
-        </Stack>
-      </Flex>
-
-      <Collapse in={isOpen} animateOpacity>
-        <MobileNav />
-      </Collapse>
+      <Container
+        height="100"
+        maxW={{ base: "100%", md: "100%", lg: "90%", xl: "90%", "2xl": "60%" }}
+        marginTop="1"
+      >
+        <HStack justifyContent={"space-between"}>
+          <HStack color={"gray"} gap={"3"} fontSize="l">
+          <Image style={{height:"85px"}} src={logo} alt="BRAND SHOP" />
+          <NavLink to={"/"} onMouseOver={changeColor}>Gifts</NavLink>
+          <NavLink to={"/"} onMouseOver={changeColor}>New</NavLink>
+            <NavLink to={"/Men"}  onMouseOver={changeColor}>MEN</NavLink>
+            <NavLink to={"/Women"} onMouseOver={changeColor}>WOMEN</NavLink>
+            <NavLink to={"/Men"} onMouseOver={changeColor}>BOY</NavLink>
+            <NavLink to={"/Women"} onMouseOver={changeColor}>GIRL</NavLink>
+          </HStack>
+          <Box>
+            <InputGroup size={"sm"}>
+              <Input placeholder="Search for..." />
+              <InputRightElement childre n={<HiSearch />} />
+              <Link to={"/Login"}><Text marginLeft={10}>{state.token?state.userName:"Login"}</Text></Link>  
+              <Link to={"/Cart"}><Text marginLeft={10}><BsHandbag size={"25"} /></Text></Link>
+              
+            </InputGroup>
+          </Box>
+        </HStack>
+      </Container>
+      <Divider orientation="horizontal" borderColor="gray.300" marginTop="-3" />
     </Box>
   );
-}
-
-const DesktopNav = () => {
-  const linkColor = useColorModeValue('gray.600', 'gray.200');
-  const linkHoverColor = useColorModeValue('gray.800', 'white');
-  const popoverContentBgColor = useColorModeValue('white', 'gray.800');
-
-  return (
-    <Stack direction={'row'} spacing={4}>
-      {NAV_ITEMS.map((navItem) => (
-        <Box key={navItem.label}>
-          <Popover trigger={'hover'} placement={'bottom-start'}>
-            <PopoverTrigger>
-              <Link
-                p={2}
-                href={navItem.href ?? '#'}
-                fontSize={'sm'}
-                fontWeight={500}
-                color={linkColor}
-                _hover={{
-                  textDecoration: 'none',
-                  color: linkHoverColor,
-                }}>
-                {navItem.label}
-              </Link>
-            </PopoverTrigger>
-
-            {navItem.children && (
-              <PopoverContent
-                border={0}
-                boxShadow={'xl'}
-                bg={popoverContentBgColor}
-                p={4}
-                rounded={'xl'}
-                minW={'sm'}>
-                <Stack>
-                  {navItem.children.map((child) => (
-                    <DesktopSubNav key={child.label} {...child} />
-                  ))}
-                </Stack>
-              </PopoverContent>
-            )}
-          </Popover>
-        </Box>
-      ))}
-    </Stack>
-  );
 };
-
-const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
-  return (
-    <Link
-      href={href}
-      role={'group'}
-      display={'block'}
-      p={2}
-      rounded={'md'}
-      _hover={{ bg: useColorModeValue('pink.50', 'gray.900') }}>
-      <Stack direction={'row'} align={'center'}>
-        <Box>
-          <Text
-            transition={'all .3s ease'}
-            _groupHover={{ color: 'pink.400' }}
-            fontWeight={500}>
-            {label}
-          </Text>
-          <Text fontSize={'sm'}>{subLabel}</Text>
-        </Box>
-        <Flex
-          transition={'all .3s ease'}
-          transform={'translateX(-10px)'}
-          opacity={0}
-          _groupHover={{ opacity: '100%', transform: 'translateX(0)' }}
-          justify={'flex-end'}
-          align={'center'}
-          flex={1}>
-          <Icon color={'pink.400'} w={5} h={5} as={ChevronRightIcon} />
-        </Flex>
-      </Stack>
-    </Link>
-  );
-};
-
-const MobileNav = () => {
-  return (
-    <Stack
-      bg={useColorModeValue('white', 'gray.800')}
-      p={4}
-      display={{ md: 'none' }}>
-      {NAV_ITEMS.map((navItem) => (
-        <MobileNavItem key={navItem.label} {...navItem} />
-      ))}
-    </Stack>
-  );
-};
-
-const MobileNavItem = ({ label, children, href }: NavItem) => {
-  const { isOpen, onToggle } = useDisclosure();
-
-  return (
-    <Stack spacing={4} onClick={children && onToggle}>
-      <Flex
-        py={2}
-        as={Link}
-        href={href ?? '#'}
-        justify={'space-between'}
-        align={'center'}
-        _hover={{
-          textDecoration: 'none',
-        }}>
-        <Text
-          fontWeight={600}
-          color={useColorModeValue('gray.600', 'gray.200')}>
-          {label}
-        </Text>
-        {children && (
-          <Icon
-            as={ChevronDownIcon}
-            transition={'all .25s ease-in-out'}
-            transform={isOpen ? 'rotate(180deg)' : ''}
-            w={6}
-            h={6}
-          />
-        )}
-      </Flex>
-
-      <Collapse in={isOpen} animateOpacity style={{ marginTop: '0!important' }}>
-        <Stack
-          mt={2}
-          pl={4}
-          borderLeft={1}
-          borderStyle={'solid'}
-          borderColor={useColorModeValue('gray.200', 'gray.700')}
-          align={'start'}>
-          {children &&
-            children.map((child) => (
-              <Link key={child.label} py={2} href={child.href}>
-                {child.label}
-              </Link>
-            ))}
-        </Stack>
-      </Collapse>
-    </Stack>
-  );
-};
-
-interface NavItem {
-  label: string;
-  subLabel?: string;
-  children?: Array<NavItem>;
-  href?: string;
-}
-
-const NAV_ITEMS: Array<NavItem> = [
-  {
-    label: 'men',
-    children: [
-      {
-        label: 'Explore Design Work',
-        subLabel: 'Trending Design to inspire you',
-        href: 'Men.jsx',
-      },
-      {
-        label: 'New & Noteworthy',
-        subLabel: 'Up-and-coming Designers',
-        href: '#',
-      },
-    ],
-  },
-  {
-    label: 'Find Work',
-    children: [
-      {
-        label: 'Job Board',
-        subLabel: 'Find your dream design job',
-        href: '#',
-      },
-      {
-        label: 'Freelance Projects',
-        subLabel: 'An exclusive list for contract work',
-        href: '#',
-      },
-    ],
-  },
-  {
-    label: 'Learn Design',
-    href: '#',
-  },
-  {
-    label: 'Hire Designers',
-    href: '#',
-  },
-];

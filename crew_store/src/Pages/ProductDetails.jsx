@@ -1,32 +1,27 @@
 import {
-    Box,
-    chakra,
-    Container,
-    Stack,
-    Text,
-    Image,
-    Flex,
-    VStack,
-    Button,
-    Heading,
-    SimpleGrid,
-    StackDivider,
-    useColorModeValue,
-    VisuallyHidden,
-    List,
-    ListItem,
+  Box,
+  Container,
+  Stack,
+  Text,
+  Image,
+  Flex,
+  Button,
+  Heading,
+  SimpleGrid,
+  StackDivider,
+  useColorModeValue,
+  List,
+  ListItem,
   } from '@chakra-ui/react';
-  import { FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
   import { MdLocalShipping } from 'react-icons/md';
   import { useParams } from "react-router-dom"
   import React from "react"
   import axios from "axios"
-  import {Link} from "react-router-dom"
   
   export default function ProductDetails() {
     const {id} = useParams()
     const [product,setProduct] = React.useState([])
-    const [cart,setCart] = React.useState([])
+    // const [cart,setCart] = React.useState([])
  
     const addToCart=()=>{
       axios({
@@ -45,7 +40,7 @@ import {
     },[id])
     
 
-    const {image,description,discount} = product
+    const {image,description,discount,limit,price,details} = product
     return (
       <Container maxW={'7xl'}>
         <SimpleGrid
@@ -75,7 +70,7 @@ import {
                 color={useColorModeValue('gray.900', 'gray.400')}
                 fontWeight={300}
                 fontSize={'2xl'}>
-                {discount}
+                ₹{discount}
               </Text>
             </Box>
   
@@ -87,20 +82,6 @@ import {
                   borderColor={useColorModeValue('gray.200', 'gray.600')}
                 />
               }>
-              <VStack spacing={{ base: 4, sm: 6 }}>
-                <Text
-                  color={useColorModeValue('gray.500', 'gray.400')}
-                  fontSize={'2xl'}
-                  fontWeight={'300'}>
-                  {description}
-                </Text>
-                <Text fontSize={'lg'}>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad
-                  aliquid amet at delectus doloribus dolorum expedita hic, ipsum
-                  maxime modi nam officiis porro, quae, quisquam quos
-                  reprehenderit velit? Natus, totam.
-                </Text>
-              </VStack>
               <Box>
                 <Text
                   fontSize={{ base: '16px', lg: '18px' }}
@@ -113,14 +94,9 @@ import {
   
                 <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
                   <List spacing={2}>
-                    <ListItem>Chronograph</ListItem>
-                    <ListItem>Master Chronometer Certified</ListItem>{' '}
-                    <ListItem>Tachymeter</ListItem>
-                  </List>
-                  <List spacing={2}>
-                    <ListItem>Anti‑magnetic</ListItem>
-                    <ListItem>Chronometer</ListItem>
-                    <ListItem>Small seconds</ListItem>
+                    <ListItem>Easy Return and Exchange Within 7 days</ListItem>
+                    <ListItem>Free Delivery </ListItem>{' '}
+                    <ListItem>Pay on Delivery</ListItem>9
                   </List>
                 </SimpleGrid>
               </Box>
@@ -137,46 +113,21 @@ import {
                 <List spacing={2}>
                   <ListItem>
                     <Text as={'span'} fontWeight={'bold'}>
-                      Between lugs:
+                      Detail : 
                     </Text>{' '}
-                    20 mm
+                    {details}
                   </ListItem>
                   <ListItem>
                     <Text as={'span'} fontWeight={'bold'}>
-                      Bracelet:
+                    Limit:
                     </Text>{' '}
-                    leather strap
+                    {limit}
                   </ListItem>
                   <ListItem>
                     <Text as={'span'} fontWeight={'bold'}>
-                      Case:
+                      Original Price :
                     </Text>{' '}
-                    Steel
-                  </ListItem>
-                  <ListItem>
-                    <Text as={'span'} fontWeight={'bold'}>
-                      Case diameter:
-                    </Text>{' '}
-                    42 mm
-                  </ListItem>
-                  <ListItem>
-                    <Text as={'span'} fontWeight={'bold'}>
-                      Dial color:
-                    </Text>{' '}
-                    Black
-                  </ListItem>
-                  <ListItem>
-                    <Text as={'span'} fontWeight={'bold'}>
-                      Crystal:
-                    </Text>{' '}
-                    Domed, scratch‑resistant sapphire crystal with anti‑reflective
-                    treatment inside
-                  </ListItem>
-                  <ListItem>
-                    <Text as={'span'} fontWeight={'bold'}>
-                      Water resistance:
-                    </Text>{' '}
-                    5 bar (50 metres / 167 feet){' '}
+                    {price}
                   </ListItem>
                 </List>
               </Box>
