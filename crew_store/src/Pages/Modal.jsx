@@ -1,21 +1,22 @@
 import { useDisclosure } from "@chakra-ui/react"
+import {Link} from "react-router-dom"
 import {Button,Modal,ModalOverlay,ModalContent,ModalHeader,ModalCloseButton,ModalFooter,Text} from "@chakra-ui/react"
 function Modals() {
     const { isOpen, onOpen, onClose } = useDisclosure()
     return (
       <>
-        <Button onClick={onOpen}>Place order</Button>
-  
+      <div style={{margin:"auto", width:"20%", marginBottom:"20px"}}>
+        <Button w={80} textAlign="center" onClick={onOpen}>Place order</Button>
+        </div> 
         <Modal isOpen={isOpen} onClose={onClose}>
-          <ModalOverlay />
           <ModalContent>
-            <ModalHeader>Completed</ModalHeader>
-            <ModalCloseButton />
-            <Text>Your order successful complete , you can enjoy </Text>
+            <ModalHeader>Successfully your order</ModalHeader>
+            <Text textAlign='center'>Your order is successful completed, you can continue shopping... </Text>
             <ModalFooter>
-              <Button colorScheme='blue' mr={3} onClick={onClose}>
-                Close
+              <Link to={"/"}><Button colorScheme='blue' mr={3} onClick={onClose}>
+                Go to Home
               </Button>
+              </Link>
             </ModalFooter>
           </ModalContent>
         </Modal>
